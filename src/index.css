@@ -2,41 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Stanley Martin Resume - Modern Tech Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base Colors - Clean white backgrounds */
+    --background: 0 0% 98%;
+    --foreground: 210 11% 15%;
 
+    /* Card System - Subtle elevation */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 11% 15%;
 
+    /* Popover Components */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 11% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Professional Blue */
+    --primary: 210 100% 12%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 210 100% 20%;
+    --primary-dark: 210 100% 8%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Sophisticated Gray */
+    --secondary: 210 11% 96%;
+    --secondary-foreground: 210 11% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted Elements */
+    --muted: 210 11% 96%;
+    --muted-foreground: 210 8% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Vibrant Teal */
+    --accent: 174 72% 41%;
+    --accent-foreground: 0 0% 98%;
+    --accent-light: 174 72% 51%;
+    --accent-dark: 174 72% 31%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Status Colors */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
+    --success: 142 71% 45%;
+    --warning: 45 93% 58%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* UI Elements */
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 174 72% 41%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+    
+    /* Tech Resume Specific Variables */
+    --hero-gradient: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 50%, hsl(var(--accent)) 100%);
+    --section-gradient: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%);
+    --card-shadow: 0 4px 6px -1px hsl(var(--primary) / 0.1), 0 2px 4px -1px hsl(var(--primary) / 0.06);
+    --card-shadow-hover: 0 10px 25px -3px hsl(var(--primary) / 0.15), 0 4px 6px -2px hsl(var(--primary) / 0.08);
+    
+    /* Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +124,60 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-accent hover:bg-accent-light text-accent-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-outline-hero {
+    @apply border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105;
+  }
+  
+  /* Section Animations */
+  .section-enter {
+    @apply transform translate-y-8 opacity-0 transition-all duration-700 ease-out;
+  }
+  
+  .section-enter-active {
+    @apply transform translate-y-0 opacity-100;
+  }
+  
+  /* Progress Bar Animation */
+  .progress-bar {
+    @apply bg-accent rounded-full h-2 transition-all duration-1000 ease-out transform scale-x-0 origin-left;
+  }
+  
+  .progress-bar-animate {
+    @apply transform scale-x-100;
+  }
+  
+  /* Card Hover Effects */
+  .service-card {
+    @apply bg-card rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-border/50;
+  }
+  
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-secondary;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-accent rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent-dark;
   }
 }
