@@ -23,7 +23,7 @@ const Hero = () => {
       <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div className="animate-fade-in-up">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Stanley Martin
+            Stanley Ayo
           </h1>
           <p className="text-xl sm:text-2xl lg:text-3xl mb-4 text-white/90 font-medium">
             IT Specialist | Software Developer | Live Sound Engineer

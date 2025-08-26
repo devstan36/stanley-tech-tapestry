@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {/* Left Section */}
           <div className="text-center md:text-left">
-            <h3 className="text-2xl font-bold mb-2">Stanley Martin</h3>
+            <h3 className="text-2xl font-bold mb-2">Stanley Ayo</h3>
             <p className="text-primary-foreground/80">
               IT Specialist & Technology Solutions Expert
             </p>
@@ -57,7 +57,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
           <p className="text-primary-foreground/60 text-sm">
-            © {new Date().getFullYear()} Stanley Martin. Helping businesses thrive through technology.
+            © {new Date().getFullYear()} Stanley Ayo. Helping businesses thrive through technology.
           </p>
         </div>
       </div>

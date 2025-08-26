@@ -50,7 +50,7 @@ const Navigation = () => {
               onClick={() => scrollToSection("home")}
               className="text-xl font-bold text-primary hover:text-accent transition-colors"
             >
-              Stanley Martin
+              Stanley Ayo
             </button>
           </div>
 

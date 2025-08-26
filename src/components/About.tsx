@@ -30,7 +30,7 @@ const About = () => {
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <p className="text-lg leading-relaxed text-foreground">
-                    I'm <span className="font-semibold text-accent">Stanley Martin</span>, an IT Specialist with over 15 years of experience delivering innovative technology solutions that make life and work easier.
+                    I'm <span className="font-semibold text-accent">Stanley Ayo</span>, an IT Specialist with over 15 years of experience delivering innovative technology solutions that make life and work easier.
                   </p>
                   
                   <p className="text-lg leading-relaxed text-foreground">
