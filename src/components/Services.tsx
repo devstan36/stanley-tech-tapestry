@@ -5,8 +5,7 @@ import {
   Network, 
   Shield, 
   Cloud, 
-  Volume2, 
-  Headphones 
+  Volume2
 } from "lucide-react";
 
 const Services = () => {
@@ -46,12 +45,6 @@ const Services = () => {
       title: "Live Event Sound Engineering",
       description: "Delivering crystal-clear audio for conferences, concerts, and corporate events with professional expertise.",
       features: ["Live Sound Setup", "Audio Mixing", "Equipment Management", "Event Coordination"]
-    },
-    {
-      icon: Headphones,
-      title: "Technical Support Services",
-      description: "Offering prompt and efficient troubleshooting for hardware, software, and network problems.",
-      features: ["24/7 Support", "Remote Assistance", "On-site Service", "Training & Documentation"]
     }
   ];
 
