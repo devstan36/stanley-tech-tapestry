@@ -12,8 +12,8 @@ COPY . .
 # Build the app
 RUN npm run build
 
-# Expose the port the app runs on
-EXPOSE 3000
+# Expose Vite preview port
+EXPOSE 4173
 
-# Start the app
-CMD ["node", "server.js"]
+# Start the Vite preview server
+CMD ["npm", "run", "preview"]
