@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
   preview: {
     host: true,
     port: 4173,
+    allowedHosts: ['bio.scaleitpro.com'],
   },
   plugins: [
     react(),
