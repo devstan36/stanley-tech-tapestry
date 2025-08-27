@@ -93,61 +93,51 @@ const Skills = () => {
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-primary mb-8 text-center">Technical Skills</h3>
           <Carousel className="w-full" opts={{
-            align: "start",
+            align: "center",
             loop: true,
             dragFree: true,
-            slides: {
-              perView: 1,
-              spacing: 16
-            },
-            breakpoints: {
-              "(min-width: 768px)": {
-                slides: {
-                  perView: 3,
-                  spacing: 24
-                }
-              }
-            }
           }}>
-            <CarouselContent>
+            <CarouselContent className="md:-ml-4">
               {technicalSkills.map((skill, index) => {
                 const Icon = skill.icon;
                 return (
-                  <CarouselItem key={index} className="md:basis-1/3">
-                    <Card className="service-card group hover:border-accent/30">
-                      <CardHeader className="pb-4">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="p-2 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
-                            <Icon className="w-6 h-6 text-accent" />
+                  <CarouselItem key={index} className="pl-4 md:basis-1/3">
+                    <div className="p-1">
+                      <Card className="service-card group hover:border-accent/30">
+                        <CardHeader className="pb-4">
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="p-2 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
+                              <Icon className="w-6 h-6 text-accent" />
+                            </div>
+                            <CardTitle className="text-lg">{skill.title}</CardTitle>
                           </div>
-                          <CardTitle className="text-lg">{skill.title}</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                          {skill.description}
-                        </p>
-                        {/* Progress Bar */}
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-primary font-medium">Proficiency</span>
-                            <span className="text-accent font-semibold">{skill.level}%</span>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                            {skill.description}
+                          </p>
+                          {/* Progress Bar */}
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-primary font-medium">Proficiency</span>
+                              <span className="text-accent font-semibold">{skill.level}%</span>
+                            </div>
+                            <div className="w-full bg-secondary rounded-full h-2">
+                              <div 
+                                className="progress-bar progress-bar-animate"
+                                style={{ width: `${skill.level}%` }}
+                              ></div>
+                            </div>
                           </div>
-                          <div className="w-full bg-secondary rounded-full h-2">
-                            <div 
-                              className="progress-bar"
-                              style={{ width: `${skill.level}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        </CardContent>
+                      </Card>
+                    </div>
                   </CarouselItem>
                 );
               })}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
+            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2" />
+            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2" />
           </Carousel>
         </div>        {/* Soft Skills */}
         <div>
