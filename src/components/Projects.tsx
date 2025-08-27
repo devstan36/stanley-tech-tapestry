@@ -70,7 +70,21 @@ const Projects = () => {
         <Carousel className="w-full" opts={{
           align: "center",
           loop: true,
-        }}>
+        }} plugins={[
+          {
+            init: (embla) => {
+              const autoplay = () => {
+                if (embla.canScrollNext()) {
+                  embla.scrollNext();
+                } else {
+                  embla.scrollTo(0);
+                }
+              };
+              const interval = setInterval(autoplay, 3000);
+              embla.on('pointerDown', () => clearInterval(interval));
+            }
+          }
+        ]}>
           <CarouselContent className="md:-ml-4">
             {projects.map((project) => (
               <CarouselItem key={project.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
