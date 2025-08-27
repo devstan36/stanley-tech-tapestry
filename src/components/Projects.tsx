@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -137,9 +137,9 @@ const Projects = () => {
                           className="flex-1"
                           asChild
                         >
-                          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                            <Github className="w-4 h-4 mr-2" />
-                            Code
+                          <a href={`/project/${project.id}`}>
+                            <ArrowRight className="w-4 h-4 mr-2" />
+                            View Details
                           </a>
                         </Button>
                       </div>

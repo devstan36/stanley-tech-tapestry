@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Linkedin, Send, MapPin, Phone } from "lucide-react";
+import { Mail, Linkedin, Send, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -13,26 +13,103 @@ const Contact = () => {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    const newErrors: {[key: string]: string} = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Create mailto link with form data
-    const subject = encodeURIComponent(`Contact from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-    const mailtoLink = `mailto:stanleym37@gmail.com?subject=${subject}&body=${body}`;
+    if (!validateForm()) {
+      return;
+    }
     
-    // Open mail client
-    window.location.href = mailtoLink;
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
     
-    // Show success toast
-    toast({
-      title: "Email client opened",
-      description: "Your message has been prepared. Please send it from your email client.",
-    });
-    
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      const htmlTemplate = `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f8f9fa;">
+          <div style="background: linear-gradient(135deg, #1a365d 0%, #2d9a8c 100%); padding: 30px; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">New Contact Form Submission</h1>
+            <p style="color: #e2e8f0; margin: 10px 0 0 0;">Stanley Tech Tapestry</p>
+          </div>
+          
+          <div style="background: white; margin: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;">
+            <div style="padding: 30px;">
+              <div style="margin-bottom: 25px;">
+                <h3 style="color: #1a365d; margin: 0 0 8px 0; font-size: 16px; font-weight: 600;">Contact Information</h3>
+                <div style="background: #f1f5f9; padding: 15px; border-radius: 6px; border-left: 4px solid #2d9a8c;">
+                  <p style="margin: 0 0 8px 0; color: #334155;"><strong>Name:</strong> ${formData.name}</p>
+                  <p style="margin: 0; color: #334155;"><strong>Email:</strong> <a href="mailto:${formData.email}" style="color: #2d9a8c; text-decoration: none;">${formData.email}</a></p>
+                </div>
+              </div>
+              
+              <div>
+                <h3 style="color: #1a365d; margin: 0 0 8px 0; font-size: 16px; font-weight: 600;">Message</h3>
+                <div style="background: #f8fafc; padding: 20px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                  <p style="margin: 0; color: #475569; line-height: 1.6; white-space: pre-wrap;">${formData.message}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div style="background: #f8fafc; padding: 20px; border-top: 1px solid #e2e8f0; text-align: center;">
+              <p style="margin: 0; color: #64748b; font-size: 14px;">Received on ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      const response = await fetch('https://formspree.io/f/movnveqa', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: new FormData(e.target as HTMLFormElement)
+      });
+      
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: "", email: "", message: "" });
+        setErrors({});
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -155,10 +232,11 @@ const Contact = () => {
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
-                      required
-                      className="border-border/50 focus:border-accent focus:ring-accent/20"
+                      className={`border-border/50 focus:border-accent focus:ring-accent/20 ${errors.name ? 'border-red-500' : ''}`}
                       placeholder="Your full name"
+                      required
                     />
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                   </div>
                   
                   <div className="space-y-2">
@@ -169,10 +247,11 @@ const Contact = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
-                      className="border-border/50 focus:border-accent focus:ring-accent/20"
+                      className={`border-border/50 focus:border-accent focus:ring-accent/20 ${errors.email ? 'border-red-500' : ''}`}
                       placeholder="your.email@example.com"
+                      required
                     />
+                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                   </div>
                   
                   <div className="space-y-2">
@@ -182,19 +261,44 @@ const Contact = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      required
                       rows={6}
-                      className="border-border/50 focus:border-accent focus:ring-accent/20 resize-none"
+                      className={`border-border/50 focus:border-accent focus:ring-accent/20 resize-none ${errors.message ? 'border-red-500' : ''}`}
                       placeholder="Tell me about your project or how I can help you..."
+                      required
                     />
+                    {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                   </div>
+                  
+                  {submitStatus === 'success' && (
+                    <div className="flex items-center gap-2 text-green-600 bg-green-50 p-3 rounded-lg mb-4">
+                      <CheckCircle className="w-5 h-5" />
+                      <span>Message sent successfully!</span>
+                    </div>
+                  )}
+                  
+                  {submitStatus === 'error' && (
+                    <div className="flex items-center gap-2 text-red-600 bg-red-50 p-3 rounded-lg mb-4">
+                      <AlertCircle className="w-5 h-5" />
+                      <span>Failed to send message. Please try again.</span>
+                    </div>
+                  )}
                   
                   <Button 
                     type="submit" 
+                    disabled={isSubmitting}
                     className="w-full btn-hero text-lg py-3"
                   >
-                    <Send className="w-5 h-5 mr-2" />
-                    Send Message
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
