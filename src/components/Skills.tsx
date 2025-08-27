@@ -96,14 +96,16 @@ const Skills = () => {
             align: "center",
             loop: true,
             dragFree: true,
+            autoplay: true,
+            interval: 5000,
           }}>
             <CarouselContent className="md:-ml-4">
               {technicalSkills.map((skill, index) => {
                 const Icon = skill.icon;
                 return (
                   <CarouselItem key={index} className="pl-4 md:basis-1/3">
-                    <div className="p-1">
-                      <Card className="service-card group hover:border-accent/30">
+                    <div className="p-1 h-full">
+                      <Card className="service-card group hover:border-accent/30 h-full flex flex-col">
                         <CardHeader className="pb-4">
                           <div className="flex items-center gap-3 mb-2">
                             <div className="p-2 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
@@ -112,12 +114,12 @@ const Skills = () => {
                             <CardTitle className="text-lg">{skill.title}</CardTitle>
                           </div>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="flex-1 flex flex-col justify-between">
                           <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
                             {skill.description}
                           </p>
                           {/* Progress Bar */}
-                          <div className="space-y-2">
+                          <div className="space-y-2 mt-auto">
                             <div className="flex justify-between text-sm">
                               <span className="text-primary font-medium">Proficiency</span>
                               <span className="text-accent font-semibold">{skill.level}%</span>
