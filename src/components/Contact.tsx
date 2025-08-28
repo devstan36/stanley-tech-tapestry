@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Linkedin, Send, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
@@ -32,6 +34,11 @@ const Contact = () => {
     
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
+    }
+    
+    const recaptchaValue = recaptchaRef.current?.getValue();
+    if (!recaptchaValue) {
+      newErrors.recaptcha = "Please complete the reCAPTCHA";
     }
     
     setErrors(newErrors);
@@ -93,6 +100,7 @@ const Contact = () => {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", message: "" });
         setErrors({});
+        recaptchaRef.current?.reset();
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you soon.",
@@ -267,6 +275,16 @@ const Contact = () => {
                       required
                     />
                     {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label className="text-primary font-medium">Security Verification</Label>
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                      theme="light"
+                    />
+                    {errors.recaptcha && <p className="text-red-500 text-sm mt-1">{errors.recaptcha}</p>}
                   </div>
                   
                   {submitStatus === 'success' && (
