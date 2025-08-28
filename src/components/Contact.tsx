@@ -6,8 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Linkedin, Send, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import { lazy, Suspense } from "react";
-const ReCAPTCHA = lazy(() => import("react-google-recaptcha"));
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -62,7 +61,7 @@ const Contact = () => {
       newErrors.message = "Message is required";
     }
     
-    if (!recaptchaCompleted && import.meta.env.VITE_RECAPTCHA_SITE_KEY) {
+    if (!recaptchaCompleted) {
       newErrors.recaptcha = "Please complete the reCAPTCHA";
     }
     
@@ -321,32 +320,21 @@ const Contact = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label id="recaptcha-label" className="text-primary font-medium">Security Verification</Label>
-                    <p className="text-xs text-muted-foreground">This helps protect against spam and automated submissions.</p>
-                    <div className="flex justify-center relative" role="group" aria-labelledby="recaptcha-label">
+                    <div className="flex justify-center relative">
                       {recaptchaLoading && (
                         <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded">
                           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
                         </div>
                       )}
-                      {import.meta.env.VITE_RECAPTCHA_SITE_KEY ? (
-                        <Suspense fallback={<div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>}>
-                          <ReCAPTCHA
-                            ref={recaptchaRef}
-                            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                            onChange={handleRecaptchaChange}
-                            onExpired={handleRecaptchaExpired}
-                            onError={handleRecaptchaError}
-                            theme="light"
-                            size={window.innerWidth < 768 ? "compact" : "normal"}
-                            onLoad={() => setRecaptchaLoading(false)}
-                          />
-                        </Suspense>
-                      ) : (
-                        <div className="text-sm text-muted-foreground p-4 border rounded">
-                          reCAPTCHA configuration missing. Please contact directly via email.
-                        </div>
-                      )}
+                      <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey="6LdHbbYrAAAAAE1dDmfR8Vr5LTIgDgPhISD-4poo"
+                        onChange={handleRecaptchaChange}
+                        onExpired={handleRecaptchaExpired}
+                        onError={handleRecaptchaError}
+                        theme="light"
+                        onLoad={() => setRecaptchaLoading(false)}
+                      />
                       {recaptchaCompleted && (
                         <div className="absolute -right-8 top-1/2 -translate-y-1/2">
                           <CheckCircle className="w-5 h-5 text-green-500" />
@@ -372,7 +360,7 @@ const Contact = () => {
                   
                   <Button 
                     type="submit" 
-                    disabled={isSubmitting || (!recaptchaCompleted && import.meta.env.VITE_RECAPTCHA_SITE_KEY)}
+                    disabled={isSubmitting || !recaptchaCompleted}
                     className="w-full btn-hero text-lg py-3"
                   >
                     {isSubmitting ? (
