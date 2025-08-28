@@ -62,7 +62,7 @@ const Contact = () => {
       newErrors.message = "Message is required";
     }
     
-    if (!recaptchaCompleted) {
+    if (!recaptchaCompleted && import.meta.env.VITE_RECAPTCHA_SITE_KEY) {
       newErrors.recaptcha = "Please complete the reCAPTCHA";
     }
     
@@ -329,18 +329,24 @@ const Contact = () => {
                           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
                         </div>
                       )}
-                      <Suspense fallback={<div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>}>
-                        <ReCAPTCHA
-                          ref={recaptchaRef}
-                          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                          onChange={handleRecaptchaChange}
-                          onExpired={handleRecaptchaExpired}
-                          onError={handleRecaptchaError}
-                          theme="light"
-                          size={window.innerWidth < 768 ? "compact" : "normal"}
-                          onLoad={() => setRecaptchaLoading(false)}
-                        />
-                      </Suspense>
+                      {import.meta.env.VITE_RECAPTCHA_SITE_KEY ? (
+                        <Suspense fallback={<div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>}>
+                          <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                            onChange={handleRecaptchaChange}
+                            onExpired={handleRecaptchaExpired}
+                            onError={handleRecaptchaError}
+                            theme="light"
+                            size={window.innerWidth < 768 ? "compact" : "normal"}
+                            onLoad={() => setRecaptchaLoading(false)}
+                          />
+                        </Suspense>
+                      ) : (
+                        <div className="text-sm text-muted-foreground p-4 border rounded">
+                          reCAPTCHA configuration missing. Please contact directly via email.
+                        </div>
+                      )}
                       {recaptchaCompleted && (
                         <div className="absolute -right-8 top-1/2 -translate-y-1/2">
                           <CheckCircle className="w-5 h-5 text-green-500" />
@@ -366,7 +372,7 @@ const Contact = () => {
                   
                   <Button 
                     type="submit" 
-                    disabled={isSubmitting || !recaptchaCompleted}
+                    disabled={isSubmitting || (!recaptchaCompleted && import.meta.env.VITE_RECAPTCHA_SITE_KEY)}
                     className="w-full btn-hero text-lg py-3"
                   >
                     {isSubmitting ? (
