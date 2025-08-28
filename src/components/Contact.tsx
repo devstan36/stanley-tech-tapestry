@@ -323,7 +323,7 @@ const Contact = () => {
                       <div id="recaptcha-container">
                         <ReCAPTCHA
                           ref={recaptchaRef}
-                          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                           onChange={handleRecaptchaChange}
                           onExpired={handleRecaptchaExpired}
                           onError={handleRecaptchaError}
