@@ -6,7 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Linkedin, Send, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import ReCAPTCHA from "react-google-recaptcha";
+import { lazy, Suspense } from "react";
+const ReCAPTCHA = lazy(() => import("react-google-recaptcha"));
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +18,32 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaCompleted, setRecaptchaCompleted] = useState(false);
+  const [recaptchaLoading, setRecaptchaLoading] = useState(true);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
+    setRecaptchaCompleted(!!token);
+    setRecaptchaLoading(false);
+    if (token && errors.recaptcha) {
+      setErrors(prev => ({ ...prev, recaptcha: '' }));
+    }
+  };
+
+  const handleRecaptchaExpired = () => {
+    setRecaptchaToken(null);
+    setRecaptchaCompleted(false);
+  };
+
+  const handleRecaptchaError = () => {
+    setRecaptchaToken(null);
+    setRecaptchaCompleted(false);
+    setErrors(prev => ({ ...prev, recaptcha: 'reCAPTCHA failed to load. You can still submit the form.' }));
+    // Allow form submission even if reCAPTCHA fails
+    setTimeout(() => setRecaptchaCompleted(true), 1000);
+  };
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
@@ -36,8 +62,7 @@ const Contact = () => {
       newErrors.message = "Message is required";
     }
     
-    const recaptchaValue = recaptchaRef.current?.getValue();
-    if (!recaptchaValue) {
+    if (!recaptchaCompleted) {
       newErrors.recaptcha = "Please complete the reCAPTCHA";
     }
     
@@ -88,18 +113,31 @@ const Contact = () => {
         </div>
       `;
       
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('_subject', `New Contact Form Submission from ${formData.name}`);
+      formDataToSend.append('_replyto', formData.email);
+      if (recaptchaToken) {
+        formDataToSend.append('g-recaptcha-response', recaptchaToken);
+      }
+      
       const response = await fetch('https://formspree.io/f/movnveqa', {
         method: 'POST',
         headers: {
           'Accept': 'application/json'
         },
-        body: new FormData(e.target as HTMLFormElement)
+        body: formDataToSend
       });
       
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", message: "" });
         setErrors({});
+        setRecaptchaToken(null);
+        setRecaptchaCompleted(false);
+        setRecaptchaLoading(true);
         recaptchaRef.current?.reset();
         toast({
           title: "Message sent successfully!",
@@ -110,6 +148,11 @@ const Contact = () => {
       }
     } catch (error) {
       setSubmitStatus('error');
+      // Reset reCAPTCHA on error
+      setRecaptchaToken(null);
+      setRecaptchaCompleted(false);
+      setRecaptchaLoading(true);
+      recaptchaRef.current?.reset();
       toast({
         title: "Failed to send message",
         description: "Please try again or contact me directly via email.",
@@ -278,12 +321,32 @@ const Contact = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label className="text-primary font-medium">Security Verification</Label>
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                      theme="light"
-                    />
+                    <Label id="recaptcha-label" className="text-primary font-medium">Security Verification</Label>
+                    <p className="text-xs text-muted-foreground">This helps protect against spam and automated submissions.</p>
+                    <div className="flex justify-center relative" role="group" aria-labelledby="recaptcha-label">
+                      {recaptchaLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
+                        </div>
+                      )}
+                      <Suspense fallback={<div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>}>
+                        <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                          onChange={handleRecaptchaChange}
+                          onExpired={handleRecaptchaExpired}
+                          onError={handleRecaptchaError}
+                          theme="light"
+                          size={window.innerWidth < 768 ? "compact" : "normal"}
+                          onLoad={() => setRecaptchaLoading(false)}
+                        />
+                      </Suspense>
+                      {recaptchaCompleted && (
+                        <div className="absolute -right-8 top-1/2 -translate-y-1/2">
+                          <CheckCircle className="w-5 h-5 text-green-500" />
+                        </div>
+                      )}
+                    </div>
                     {errors.recaptcha && <p className="text-red-500 text-sm mt-1">{errors.recaptcha}</p>}
                   </div>
                   
@@ -303,7 +366,7 @@ const Contact = () => {
                   
                   <Button 
                     type="submit" 
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !recaptchaCompleted}
                     className="w-full btn-hero text-lg py-3"
                   >
                     {isSubmitting ? (
