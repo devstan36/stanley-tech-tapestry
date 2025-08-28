@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,9 +9,21 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselApi,
 } from "@/components/ui/carousel";
 
 const Projects = () => {
+  const [api, setApi] = React.useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) return;
+
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [api]);
   const projects = [
     {
       id: 1,
@@ -67,24 +80,14 @@ const Projects = () => {
           </p>
         </div>
 
-        <Carousel className="w-full" opts={{
-          align: "center",
-          loop: true,
-        }} plugins={[
-          {
-            init: (embla) => {
-              const autoplay = () => {
-                if (embla.canScrollNext()) {
-                  embla.scrollNext();
-                } else {
-                  embla.scrollTo(0);
-                }
-              };
-              const interval = setInterval(autoplay, 3000);
-              embla.on('pointerDown', () => clearInterval(interval));
-            }
-          }
-        ]}>
+        <Carousel 
+          className="w-full" 
+          setApi={setApi}
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+        >
           <CarouselContent className="md:-ml-4">
             {projects.map((project) => (
               <CarouselItem key={project.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
@@ -149,8 +152,8 @@ const Projects = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2" />
-          <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2" />
+          <CarouselPrevious className="-left-8 top-1/2 h-12 w-12" />
+          <CarouselNext className="-right-8 top-1/2 h-12 w-12" />
         </Carousel>
       </div>
     </section>
