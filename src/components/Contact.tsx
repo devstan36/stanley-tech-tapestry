@@ -19,13 +19,13 @@ const Contact = () => {
   const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [recaptchaCompleted, setRecaptchaCompleted] = useState(false);
-  const [recaptchaLoading, setRecaptchaLoading] = useState(true);
+
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleRecaptchaChange = (token: string | null) => {
+    console.log('reCAPTCHA token received:', !!token);
     setRecaptchaToken(token);
     setRecaptchaCompleted(!!token);
-    setRecaptchaLoading(false);
     if (token && errors.recaptcha) {
       setErrors(prev => ({ ...prev, recaptcha: '' }));
     }
@@ -37,11 +37,10 @@ const Contact = () => {
   };
 
   const handleRecaptchaError = () => {
+    console.error('reCAPTCHA error occurred');
     setRecaptchaToken(null);
     setRecaptchaCompleted(false);
-    setErrors(prev => ({ ...prev, recaptcha: 'reCAPTCHA failed to load. You can still submit the form.' }));
-    // Allow form submission even if reCAPTCHA fails
-    setTimeout(() => setRecaptchaCompleted(true), 1000);
+    setErrors(prev => ({ ...prev, recaptcha: 'reCAPTCHA failed to load' }));
   };
 
   const validateForm = () => {
@@ -136,7 +135,7 @@ const Contact = () => {
         setErrors({});
         setRecaptchaToken(null);
         setRecaptchaCompleted(false);
-        setRecaptchaLoading(true);
+
         recaptchaRef.current?.reset();
         toast({
           title: "Message sent successfully!",
@@ -150,7 +149,7 @@ const Contact = () => {
       // Reset reCAPTCHA on error
       setRecaptchaToken(null);
       setRecaptchaCompleted(false);
-      setRecaptchaLoading(true);
+
       recaptchaRef.current?.reset();
       toast({
         title: "Failed to send message",
@@ -320,26 +319,16 @@ const Contact = () => {
                   </div>
                   
                   <div className="space-y-2">
-                    <div className="flex justify-center relative">
-                      {recaptchaLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded">
-                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
-                        </div>
-                      )}
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey="6LdHbbYrAAAAAE1dDmfR8Vr5LTIgDgPhISD-4poo"
-                        onChange={handleRecaptchaChange}
-                        onExpired={handleRecaptchaExpired}
-                        onError={handleRecaptchaError}
-                        theme="light"
-                        onLoad={() => setRecaptchaLoading(false)}
-                      />
-                      {recaptchaCompleted && (
-                        <div className="absolute -right-8 top-1/2 -translate-y-1/2">
-                          <CheckCircle className="w-5 h-5 text-green-500" />
-                        </div>
-                      )}
+                    <div className="flex justify-center">
+                      <div id="recaptcha-container">
+                        <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                          onChange={handleRecaptchaChange}
+                          onExpired={handleRecaptchaExpired}
+                          onError={handleRecaptchaError}
+                        />
+                      </div>
                     </div>
                     {errors.recaptcha && <p className="text-red-500 text-sm mt-1">{errors.recaptcha}</p>}
                   </div>
