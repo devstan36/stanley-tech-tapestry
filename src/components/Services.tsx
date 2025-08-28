@@ -14,7 +14,7 @@ const Services = () => {
       icon: Code2,
       title: "Custom Software Development",
       description: "Building tailored web application in all major programming language that meets your specific business requirements",
-      features: ["Web Applications", "Mobile Apps", "Desktop Solutions", "API Development"]
+      features: ["Web Applications", "Business/Corporate Websites", "API Development"]
     },
     {
       icon: Server,

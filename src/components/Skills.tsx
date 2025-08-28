@@ -118,19 +118,6 @@ const Skills = () => {
                           <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
                             {skill.description}
                           </p>
-                          {/* Progress Bar */}
-                          <div className="space-y-2 mt-auto">
-                            <div className="flex justify-between text-sm">
-                              <span className="text-primary font-medium">Proficiency</span>
-                              <span className="text-accent font-semibold">{skill.level}%</span>
-                            </div>
-                            <div className="w-full bg-secondary rounded-full h-2">
-                              <div 
-                                className="progress-bar progress-bar-animate"
-                                style={{ width: `${skill.level}%` }}
-                              ></div>
-                            </div>
-                          </div>
                         </CardContent>
                       </Card>
                     </div>

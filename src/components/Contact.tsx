@@ -183,7 +183,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-medium text-primary">Location</p>
-                      <p className="text-muted-foreground">Available for remote and on-site work</p>
+                      <p className="text-muted-foreground">No 5 Brentfield Avenue, Magboro, Ogun State</p>
                     </div>
                   </div>
                 </div>
