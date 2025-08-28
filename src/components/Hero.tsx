@@ -7,6 +7,10 @@ const Hero = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToNextSection = () => {
+    document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background Image with Overlay */}
@@ -58,9 +62,12 @@ const Hero = () => {
           </div>
           
           {/* Scroll Indicator */}
-          <div className="animate-bounce">
+          <button 
+            onClick={scrollToNextSection}
+            className="animate-bounce hover:text-white/80 transition-colors cursor-pointer"
+          >
             <ArrowDown className="w-6 h-6 mx-auto text-white/60" />
-          </div>
+          </button>
         </div>
       </div>
       
