@@ -65,6 +65,16 @@ const Projects = () => {
       liveUrl: "https://everyschool.online",
       githubUrl: "#",
       category: "Education Technology"
+    },
+    {
+      id: 6,
+      title: "Education Management Information System (EMIS)",
+      description: "The Education Management Information System (EMIS) is a comprehensive digital platform designed to transform educational administration and data management across Nigeria's educational ecosystem. This centralized system enables real-time monitoring, planning, and decision-making for the Nigerian education sector at federal, state, and local government levels.",
+      image: "/emis.png",
+      technologies: ["React", "TypeScript", "PostgreSQL", "FastAPI"],
+      liveUrl: "https://emis.scaleitpro.com",
+      githubUrl: "#",
+      category: "Education Technology"
     }
   ];
 
