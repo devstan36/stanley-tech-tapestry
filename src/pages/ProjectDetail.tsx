@@ -10,12 +10,12 @@ const ProjectDetail = () => {
   const projects = [
     {
       id: 1,
-      title: "RealtyPro",
+      title: "Estateman",
       description: "The complete real estate management solution trusted by over 10,000+ agents and brokerages worldwide. Streamline operations, accelerate deal closures, and scale your business with our all-in-one platform designed for modern real estate professionals.",
       fullDescription: "The complete real estate management solution trusted by over 10,000+ agents and brokerages worldwide. Streamline operations, accelerate deal closures, and scale your business with our all-in-one platform designed for modern real estate professionals. Transform Your Real Estate Business From lead generation to closing day, our comprehensive platform handles every aspect of your real estate workflow. Manage listings, nurture client relationships, track commissions, and automate routine tasks while focusing on what you do best - closing deals and growing your network.",
       image: "/realty.png",
-      technologies: ["React", "TypeScript"],
-      liveUrl: "https://realtyspark.scaleitpro.com",
+      technologies: ["React", "TypeScript", `FastAPI`, "PostgreSQL"],
+      liveUrl: "https://estateman.scaleitpro.com",
       category: "Real Estate Technology",
       features: ["Lead Generation", "Listing Management", "Client Relationship Management", "Commission Tracking", "Deal Pipeline"]
     },
@@ -26,7 +26,7 @@ const ProjectDetail = () => {
       fullDescription: "Your Ultimate Travel Companion - Car Rental & Hotel Booking Made Simple. Book smarter, travel better. The all-in-one app trusted by over 2 million travelers worldwide for seamless car rentals and hotel reservations. Compare prices, secure the best deals, and manage your entire trip from one powerful platform. Everything You Need for Perfect Travel Planning Whether you're planning a business trip, family vacation, or weekend getaway, our comprehensive app puts the world's best travel options at your fingertips. Compare thousands of cars and accommodations, book instantly, and enjoy exclusive member benefits wherever your journey takes you.",
       image: "/skylyt.png",
       technologies: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
-      liveUrl: "https://skylyt.scaleitpro.com",
+      liveUrl: "https://skylytluxury.com",
       category: "Travel Technology",
       features: ["Car Rental Booking", "Hotel Reservations", "Price Comparison", "Trip Management", "Member Benefits"]
     },
@@ -48,7 +48,7 @@ const ProjectDetail = () => {
       description: "EverySchool is an integrated, cloud-based school management system designed to streamline administrative processes and enhance educational outcomes for institutions of all sizes.",
       fullDescription: "EverySchool is an integrated, cloud-based school management system designed to streamline administrative processes and enhance educational outcomes for institutions of all sizes. Our comprehensive platform brings together students, teachers, parents, and administrators in a unified digital ecosystem that simplifies daily operations and improves communication across the entire school community.",
       image: "/every.png",
-      technologies: ["Laravel", "PostgreSQL"],
+      technologies: ["Php", "MySQL"],
       liveUrl: "https://everyschool.online",
       category: "Education Technology",
       features: ["Student Management", "Teacher Portal", "Parent Communication", "Administrative Tools", "Academic Tracking"]
