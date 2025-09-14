@@ -37,7 +37,7 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: "Skylit Luxury",
+      title: "Skylyt Luxury",
       description: "Your Ultimate Travel Companion - Car Rental & Hotel Booking Made Simple. Book smarter, travel better. The all-in-one app trusted by over 2 million travelers worldwide for seamless car rentals and hotel reservations. Compare prices, secure the best deals, and manage your entire trip from one powerful platform. Everything You Need for Perfect Travel Planning Whether you're planning a business trip, family vacation, or weekend getaway, our comprehensive app puts the world's best travel options at your fingertips.",
       image: "/skylyt.png",
       technologies: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
