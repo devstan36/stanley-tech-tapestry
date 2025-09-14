@@ -27,11 +27,11 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "RealtyPro",
+      title: "Estateman",
       description: "The complete real estate management solution trusted by over 10,000+ agents and brokerages worldwide. Streamline operations, accelerate deal closures, and scale your business with our all-in-one platform designed for modern real estate professionals. Transform Your Real Estate Business From lead generation to closing day, our comprehensive platform handles every aspect of your real estate workflow.",
       image: "/realty.png",
-      technologies: ["React", "TypeScript"],
-      liveUrl: "https://realtyspark.scaleitpro.com",
+      technologies: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
+      liveUrl: "https://estateman.scaleitpro.com",
       githubUrl: "#",
       category: "Real Estate Technology"
     },
@@ -61,7 +61,7 @@ const Projects = () => {
       title: "EverySchool Management System",
       description: "EverySchool is an integrated, cloud-based school management system designed to streamline administrative processes and enhance educational outcomes for institutions of all sizes.",
       image: "/every.png",
-      technologies: ["Laravel", "PostgreSQL"],
+      technologies: ["Php", "MySQL"],
       liveUrl: "https://everyschool.online",
       githubUrl: "#",
       category: "Education Technology"
