@@ -2,7 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { web3Projects } from "@/components/Projects";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -63,22 +64,22 @@ const ProjectDetail = () => {
       liveUrl: "https://emis.scaleitpro.com",
       category: "Education Technology",
       features: ["Real-time Monitoring", "Data Management", "Educational Planning", "Government Integration", "Decision Support"]
-    }
+    },
+
   ];
 
-  const project = projects.find(p => p.id === parseInt(id || "0"));
+  const allProjects = [...projects, ...web3Projects];
+  const project = allProjects.find(p => p.id === parseInt(id || "0"));
 
   if (!project) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-primary mb-4">Project Not Found</h1>
-          <Link to="/">
-            <Button>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Home
-            </Button>
-          </Link>
+          <Button onClick={() => window.history.back()}>
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Home
+          </Button>
         </div>
       </div>
     );
@@ -88,12 +89,15 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/">
-            <Button variant="outline">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Home
-            </Button>
-          </Link>
+          <Button 
+            variant="outline"
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Home
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -139,13 +143,21 @@ const ProjectDetail = () => {
               </ul>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-4 flex gap-4">
               <Button asChild className="btn-hero">
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-4 h-4 mr-2" />
                   View Live Demo
                 </a>
               </Button>
+              {project.githubUrl && project.githubUrl !== "#" && (
+                <Button asChild variant="outline">
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <Github className="w-4 h-4 mr-2" />
+                    View On Github
+                  </a>
+                </Button>
+              )}
             </div>
           </div>
         </div>

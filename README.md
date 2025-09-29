@@ -1,73 +1,96 @@
-# Welcome to your Lovable project
+# Stanley Tech Tapestry - Portfolio Website
 
-## Project info
+A modern, responsive portfolio website showcasing Stanley Ayo's expertise in IT, software development, and Web3 technologies.
 
-**URL**: https://lovable.dev/projects/f8b414f0-6e18-408d-956f-11bd170898b8
+## 🚀 Features
 
-## How can I edit this code?
+- **Responsive Design** - Optimized for all devices
+- **Web3 Integration** - Showcase of blockchain and DeFi projects
+- **Contact Form** - Google reCAPTCHA protected contact system
+- **Live Chat** - Chatwoot integration for real-time support
+- **Project Showcase** - Interactive carousels and detailed project pages
+- **Modern UI** - Built with shadcn/ui components and Tailwind CSS
 
-There are several ways of editing your application.
+## 🛠️ Technologies Used
 
-**Use Lovable**
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, shadcn/ui
+- **Forms**: React Hook Form, Google reCAPTCHA
+- **Routing**: React Router DOM
+- **Icons**: Lucide React
+- **Chat**: Chatwoot SDK
+- **Deployment**: Frontend-only static hosting
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f8b414f0-6e18-408d-956f-11bd170898b8) and start prompting.
+## 📦 Installation
 
-Changes made via Lovable will be committed automatically to this repo.
+```bash
+# Clone the repository
+git clone https://github.com/your-username/stanley-tech-tapestry.git
 
-**Use your preferred IDE**
+# Navigate to project directory
+cd stanley-tech-tapestry
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+# Install dependencies
+npm install
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🔧 Environment Variables
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Create a `.env` file in the root directory:
 
-**Use GitHub Codespaces**
+```env
+VITE_RECAPTCHA_SITE_KEY=your_recaptcha_site_key_here
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🚀 Deployment
 
-## What technologies are used for this project?
+This is a frontend-only application that can be deployed to any static hosting service:
 
-This project is built with:
+```bash
+# Build for production
+npm run build
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Preview production build
+npm run preview
+```
 
-## How can I deploy this project?
+## 📁 Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/f8b414f0-6e18-408d-956f-11bd170898b8) and click on Share -> Publish.
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Contact.tsx     # Contact form with reCAPTCHA
+│   ├── Projects.tsx    # Project showcase sections
+│   ├── Skills.tsx      # Technical skills display
+│   └── ...
+├── pages/              # Page components
+│   └── ProjectDetail.tsx
+├── hooks/              # Custom React hooks
+└── lib/                # Utility functions
+```
 
-## Can I connect a custom domain to my Lovable project?
+## 🎨 Key Sections
 
-Yes, you can!
+- **Hero** - Professional introduction with call-to-action
+- **Skills** - Technical expertise showcase
+- **Services** - Professional service offerings
+- **Projects** - Web3 and traditional project portfolios
+- **Contact** - reCAPTCHA protected contact form
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🔗 Live Demo
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Visit the live website: [Stanley Tech Tapestry](https://bio.scaleitpro.com)
+
+## 📧 Contact
+
+**Stanley Ayo**  
+IT Specialist | Software Developer | Live Sound Engineer  
+Email: stanleym37@gmail.com  
+Location: No 5 Brentfield Avenue, Magboro, Ogun State
+
+## 📄 License
+
+This project is licensed under the MIT License.
