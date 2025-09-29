@@ -106,6 +106,8 @@ const ProjectDetail = () => {
               src={project.image} 
               alt={project.title}
               className="w-full h-64 lg:h-96 object-contain rounded-lg shadow-lg bg-gray-50"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

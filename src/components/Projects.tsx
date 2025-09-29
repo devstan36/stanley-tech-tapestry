@@ -39,15 +39,15 @@ const web3Projects = [
     },
     {
       id: 103,
-      title: "DAO Governance Platform",
-      description: "A decentralized autonomous organization platform enabling community governance through token-based voting and proposal management systems.",
+      title: "MEV Dashboard",
+      description: "A comprehensive MEV (Maximum Extractable Value) analytics platform for Solana providing real-time opportunity detection, validator performance tracking, bundle construction, and advanced MEV attribution.",
       fullDescription: "A decentralized autonomous organization platform enabling community governance through token-based voting and proposal management systems. Empowers communities to make collective decisions transparently and efficiently.",
-      image: "/placeholder.svg",
-      technologies: ["Solidity", "TypeScript", "Hardhat", "Chainlink"],
+      image: "/mev.png",
+      technologies: ["Express.js", "PostgreSQL", "WebSocket", "Solana Web3.js"],
       liveUrl: "#",
-      githubUrl: "#",
-      category: "DAO",
-      features: ["Token-based Voting", "Proposal Management", "Treasury Management", "Multi-sig Wallets", "Governance Analytics"]
+      githubUrl: "https://github.com/stanmart1/mev",
+      category: "MEV",
+      features: ["Real-time MEV Tracking", "Arbitrage Detection", "Liquidation Monitoring", "WebSocket Notifications"]
     }
 ];
 
@@ -148,6 +148,8 @@ const Projects = () => {
                     src={project.image} 
                     alt={project.title}
                     className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300 bg-gray-50"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 
@@ -227,6 +229,8 @@ const Projects = () => {
                         src={project.image} 
                         alt={project.title}
                         className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300 bg-gray-50"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     
