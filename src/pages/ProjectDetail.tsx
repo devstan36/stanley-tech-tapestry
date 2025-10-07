@@ -16,7 +16,8 @@ const ProjectDetail = () => {
       fullDescription: "The complete real estate management solution trusted by over 10,000+ agents and brokerages worldwide. Streamline operations, accelerate deal closures, and scale your business with our all-in-one platform designed for modern real estate professionals. Transform Your Real Estate Business From lead generation to closing day, our comprehensive platform handles every aspect of your real estate workflow. Manage listings, nurture client relationships, track commissions, and automate routine tasks while focusing on what you do best - closing deals and growing your network.",
       image: "/realty.png",
       technologies: ["React", "TypeScript", `FastAPI`, "PostgreSQL"],
-      liveUrl: "https://estateman.scaleitpro.com",
+      liveUrl: "https://estateman.online",
+      githubUrl: "#",
       category: "Real Estate Technology",
       features: ["Lead Generation", "Listing Management", "Client Relationship Management", "Commission Tracking", "Deal Pipeline"]
     },
@@ -28,19 +29,9 @@ const ProjectDetail = () => {
       image: "/skylyt.png",
       technologies: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
       liveUrl: "https://skylytluxury.com",
+      githubUrl: "#",
       category: "Travel Technology",
       features: ["Car Rental Booking", "Hotel Reservations", "Price Comparison", "Trip Management", "Member Benefits"]
-    },
-    {
-      id: 3,
-      title: "Calmcare",
-      description: "Your Ultimate Travel Professional Counseling Platform - Mental Health Support That Fits Your Life. Access professional mental health support anytime, anywhere through secure video sessions, messaging, and personalized care plans.",
-      fullDescription: "Your Ultimate Travel Professional Counseling Platform - Mental Health Support That Fits Your Life. Access professional mental health support anytime, anywhere through secure video sessions, messaging, and personalized care plans. Healing Made Accessible Break down barriers to mental health care with our comprehensive platform designed for modern wellness needs. Whether you're managing anxiety, depression, relationship challenges, or life transitions, our network of qualified professionals provides compassionate support tailored to your unique journey.",
-      image: "/calm.png",
-      technologies: ["React", "TypeScript"],
-      liveUrl: "https://calmcare.scaleitpro.com",
-      category: "Mental Health Technology",
-      features: ["Video Sessions", "Secure Messaging", "Personalized Care Plans", "Professional Network", "Wellness Tracking"]
     },
 
     {
@@ -51,21 +42,10 @@ const ProjectDetail = () => {
       image: "/every.png",
       technologies: ["Php", "MySQL"],
       liveUrl: "https://everyschool.online",
+      githubUrl: "#",
       category: "Education Technology",
       features: ["Student Management", "Teacher Portal", "Parent Communication", "Administrative Tools", "Academic Tracking"]
     },
-    {
-      id: 6,
-      title: "Education Management Information System (EMIS)",
-      description: "The Education Management Information System (EMIS) is a comprehensive digital platform designed to transform educational administration and data management across Nigeria's educational ecosystem.",
-      fullDescription: "The Education Management Information System (EMIS) is a comprehensive digital platform designed to transform educational administration and data management across Nigeria's educational ecosystem. This centralized system enables real-time monitoring, planning, and decision-making for the Nigerian education sector at federal, state, and local government levels.",
-      image: "/emis.png",
-      technologies: ["React", "TypeScript", "PostgreSQL", "FastAPI"],
-      liveUrl: "https://emis.scaleitpro.com",
-      category: "Education Technology",
-      features: ["Real-time Monitoring", "Data Management", "Educational Planning", "Government Integration", "Decision Support"]
-    },
-
   ];
 
   const allProjects = [...projects, ...web3Projects];

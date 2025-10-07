@@ -44,7 +44,7 @@ const web3Projects = [
       fullDescription: "A decentralized autonomous organization platform enabling community governance through token-based voting and proposal management systems. Empowers communities to make collective decisions transparently and efficiently.",
       image: "/mev.png",
       technologies: ["Express.js", "PostgreSQL", "WebSocket", "Solana Web3.js"],
-      liveUrl: "#",
+      liveUrl: "https://mev.scaleitpro.com",
       githubUrl: "https://github.com/stanmart1/mev",
       category: "MEV",
       features: ["Real-time MEV Tracking", "Arbitrage Detection", "Liquidation Monitoring", "WebSocket Notifications"]
@@ -73,7 +73,7 @@ const Projects = () => {
       description: "The complete real estate management solution trusted by over 10,000+ agents and brokerages worldwide. Streamline operations, accelerate deal closures, and scale your business with our all-in-one platform designed for modern real estate professionals. Transform Your Real Estate Business From lead generation to closing day, our comprehensive platform handles every aspect of your real estate workflow.",
       image: "/realty.png",
       technologies: ["React", "TypeScript", "FastAPI", "PostgreSQL"],
-      liveUrl: "https://estateman.scaleitpro.com",
+      liveUrl: "https://estateman.online",
       githubUrl: "#",
       category: "Real Estate Technology"
     },
@@ -88,17 +88,6 @@ const Projects = () => {
       category: "Travel Technology"
     },
     {
-      id: 3,
-      title: "Calmcare",
-      description: "Your Ultimate Travel Professional Counseling Platform - Mental Health Support That Fits Your Life. Access professional mental health support anytime, anywhere through secure video sessions, messaging, and personalized care plans. Healing Made Accessible Break down barriers to mental health care with our comprehensive platform designed for modern wellness needs. Whether you're managing anxiety, depression, relationship challenges, or life transitions, our network of qualified professionals provides compassionate support tailored to your unique journey.",
-      image: "/calm.png",
-      technologies: ["React", "TypeScript"],
-      liveUrl: "https://calmcare.scaleitpro.com",
-      githubUrl: "#",
-      category: "Mental Health Technology"
-    },
-
-    {
       id: 5,
       title: "EverySchool Management System",
       description: "EverySchool is an integrated, cloud-based school management system designed to streamline administrative processes and enhance educational outcomes for institutions of all sizes.",
@@ -108,16 +97,6 @@ const Projects = () => {
       githubUrl: "#",
       category: "Education Technology"
     },
-    {
-      id: 6,
-      title: "Education Management Information System (EMIS)",
-      description: "The Education Management Information System (EMIS) is a comprehensive digital platform designed to transform educational administration and data management across Nigeria's educational ecosystem. This centralized system enables real-time monitoring, planning, and decision-making for the Nigerian education sector at federal, state, and local government levels.",
-      image: "/emis.png",
-      technologies: ["React", "TypeScript", "PostgreSQL", "FastAPI"],
-      liveUrl: "https://emis.scaleitpro.com",
-      githubUrl: "#",
-      category: "Education Technology"
-    }
   ];
 
   return (
